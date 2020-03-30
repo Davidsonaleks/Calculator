@@ -20,8 +20,8 @@ var Calculator = /** @class */ (function () {
         configurable: true
     });
     Calculator.prototype.isNumber = function (value) {
-        if (value === ".")
-            return false;
+        if (value === "(" || value === ")")
+            return true;
         return !isNaN(Number(value));
     };
     Calculator.prototype.input = function () {
@@ -38,7 +38,12 @@ var Calculator = /** @class */ (function () {
     };
     Calculator.prototype.inputNumber = function (el) {
         var _this = this;
-        el.addEventListener("click", function () { return (_this.value = el.innerHTML); });
+        el.addEventListener("click", function () {
+            console.log(typeof _this.value);
+            if (typeof _this.value === "number")
+                _this.board.innerHTML = "";
+            _this.value = el.innerHTML;
+        });
     };
     Calculator.prototype.inputOperator = function (el) {
         var _this = this;

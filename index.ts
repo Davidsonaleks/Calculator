@@ -29,7 +29,7 @@ class Calculator {
   }
 
   isNumber(value: string) {
-    if (value === ".") return false
+    if (value === "(" || value === ")") return true
     return !isNaN(Number(value))
   }
 
@@ -45,7 +45,11 @@ class Calculator {
   }
 
   inputNumber(el: Element) {
-    el.addEventListener("click", () => (this.value = el.innerHTML))
+    el.addEventListener("click", () => {
+      console.log(typeof this.value)
+      if (typeof this.value === "number") this.board.innerHTML = ""
+      this.value = el.innerHTML
+    })
   }
 
   inputOperator(el: Element) {
